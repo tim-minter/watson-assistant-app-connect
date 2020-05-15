@@ -12,7 +12,7 @@ This solution uses an IBM App Connect API flow that exposes an API which acts as
 
 # Achitecture
 
-![Image of Architecture](/images/architecture.png)
+![Image of Architecture](/images/Architecture.png)
 
 # Setup
 
@@ -26,7 +26,7 @@ The free version is perfectly fine again.
 
 1. Open the [management page](https://us-south.assistant.watson.cloud.ibm.com) (this link may not work depending on where you created your assistant) of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant
 
-![Intial WA interface](/images/initialcreateassistant.png)
+![Intial WA interface](/images/initalcreateassistant.png)
 
 1. Give the assistant a name
 
@@ -48,8 +48,21 @@ The free version is perfectly fine again.
 
 ![Create intent intial page](/images/createintentsplash.png)
 
-1. Go to the Intents section. Add an intent called "#get_my_ip" and complete it as shown below
-![Image of Architecture](/images/architecture.png)
+1. Go to the Intents section. Add an intent called "#get_my_ip" and complete it as shown below.
+
+![Image of Architecture](/images/createintent.png)
+
+1. Fill in the intent as shown below.
+
+![Image of Architecture](/images/defineintent.png)
+
+1. Close the Intent (top right arrow) and click on the Dialogue menu
+1. Click on the Add node button in the dilaogue view (shown below)
+
+![Image of Architecture](/images/initialdialgue.png)
+
+
+![Image of Architecture](/images/initialdialguesettings.png)
 
 ### License
 
