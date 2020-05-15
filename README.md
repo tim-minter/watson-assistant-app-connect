@@ -59,10 +59,10 @@ The free version is perfectly fine again.
 1. Close the Intent (top right arrow) and click on the Dialogue menu
 1. Click on the Add node button in the dilaogue view (shown below)
 
-![Image of Architecture](/images/initialdialgue.png)
+![Image of Architecture](/images/initialdialogue.png)
 
 
-![Image of Architecture](/images/initialdialguesettings.png)
+![Image of Architecture](/images/initialdialoguesettings.png)
 
 ### License
 
