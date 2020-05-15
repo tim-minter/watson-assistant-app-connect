@@ -1,3 +1,3 @@
 # MAINTAINERS
 
-David Seager - seager@uk.ibm.com
+Tim Minter - tim.minter@uk.ibm.com
