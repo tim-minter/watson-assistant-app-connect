@@ -61,12 +61,21 @@ The free version is perfectly fine again.
 
 ![Image of Architecture](/images/initialdialogue.png)
 
+The first thing to do here is select the intent you just created in the box shown below.
+Then turn on the webhook feature. Click on the Customise gear icon at the top right
 
 ![Image of Architecture](/images/initialdialoguesettings.png)
 
+The following diaglogue will be shown.
+Click the Webhooks slider to on 
+
+![Image of Architecture](/images/turnonwebhooks.png)
+
+Now, back in the dialogue node settings you  
+
 ### License
 
-Copyright 2018 Tim Minter
+Copyright 2020 Tim Minter
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
