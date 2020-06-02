@@ -61,12 +61,47 @@ The free version is perfectly fine again.
 
 ![Image of Architecture](/images/initialdialogue.png)
 
+The first thing to do here is select the intent you just created in the box shown below.
+Then turn on the webhook feature. Click on the Customise gear icon at the top right
 
 ![Image of Architecture](/images/initialdialoguesettings.png)
 
+The following diaglogue will be shown.
+Click the Webhooks slider to on 
+
+![Image of Architecture](/images/turnonwebhooks.png)
+
+Now, back in the dialogue node settings you will see some additional fields have appeared...
+
+![Image of Architecture](/images/webhookdialoguesettings.png)
+
+The paramteres section allows you to send data with your webhook call. We will be creating an API that accepts a "type" parameter later. For this demo lets add the type parameter and give it a value of "getIPAddress". Any number of parameters can be sent.
+The Return variable is auto populated with a name, but can be chnaged to anything you want. This becomes a Context Variable and will be filled with all the data that is returned by the webhook call later and can be used in your dialogues.
+The "Assistant responds" section is also pre-populated with a couple of values. If you change the variable name above, you'll need to chage the name in this section too.
+The first lines basically says "if we get a result back from the webhook (ie the variable is populated) then say x".
+    This is the whole line: If assistant recognises `$webhook_result_1` then respond with `My ip address is <? $webhook_result_1.reply ?>".`
+    The <? ?> format basically inserts a variable into the dialogue reply and can be used with any variable used within Watson Assistant. 
+The second line handles errors and Watson Assistant returnes errors in a particular format, shown below.
+    If assistant recognises `anything else` (ie an error) then reply with `The callout generated this error: <? output.webhook_error.webhook_result_1 ?>.`
+    
+The last part to complete in Watson Assisant is setting the webook, but we need to creatre the API to call first!
+
+We will use IBM App Connect to create the API. Within APP Connect we can then create as many integrations as we want (each called via a different "type" parameter, that can be called via that one API.
+
+#Create an instance of IBM App Connect
+
+To create a new instance of APP Connect, go to your cloud account and search the catalogue for App Connect. Follow the setup steps and choose the Lite plan.
+
+Once the setup completes open App Connect, go to Manage and then Launch App Connect.
+
+Go to the Dashbard section and then click the New button and select Flows for an API.
+
+![Image of Architecture](/images/apicreation.png)
+
+
 ### License
 
-Copyright 2018 Tim Minter
+Copyright 2020 Tim Minter
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
