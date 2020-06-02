@@ -6,11 +6,11 @@ Not long ago, you would have needed to write (and therefore host and secure) cod
 
 This is a write up of a real project I completed and, as an example, I was able to add a ServiceNow problem creation conversation to my Watson Assistant in less than 15 minutes (including the creation of the ServiceNow sandbox from https://developer.servicenow.com).
 
-IBM App Connect allows you to "connect anything to anything" and build workflows to "do anything" between those connections. We are talking workflow/business logic and transformations basically. This really could be anything from turning an email into a problem ticket to recording the mileage of a fleet of connected vehichles and figuring out which miles should be expenses and then handling the exprense process, to performing automated insurance claims based on images sent by the customer etc etc.
+IBM App Connect allows you to "connect anything to anything" and build workflows to "do anything" between those connections. We are talking workflow/business logic and transformations basically. This really could be anything from turning an email into a problem ticket to recording the mileage of a fleet of connected vehicles and figuring out which miles should be expenses and then handling the expense process, to performing automated insurance claims based on images sent by the customer etc etc.
 
-This solution uses an IBM App Connect API flow that exposes an API which acts as a router for incomming calls from Watson Assistant. Watson Assistant has a powerful Webhook feature but is limited in that only one web hook can be configured per assistant skill. It's entirely possible to have a number of skills within a Watson Assistant but even within a single skill you may want to be able to call a number of integrations, so a router API makes sense. 
+This solution uses an IBM App Connect API flow that exposes an API which acts as a router for incoming calls from Watson Assistant. Watson Assistant has a powerful Webhook feature but is limited in that only one web hook can be configured per assistant skill. It's entirely possible to have a number of skills within a Watson Assistant but even within a single skill you may want to be able to call a number of integrations, so a router API makes sense. 
 
-# Achitecture
+# Architecture
 
 ![Image of Architecture](/images/Architecture.png)
 
@@ -19,14 +19,14 @@ This solution uses an IBM App Connect API flow that exposes an API which acts as
 1. Sign in to or up for an IBM Cloud account [here](https://cloud.ibm.com)
 
 1. Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
-The free version can be used. In my actual solution I used the Plus version that comes with an incedibly simple way to embed the Assistant into a web page.
+The free version can be used. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
 
 1. Create an instance of IBM Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
 The free version is perfectly fine again.
 
 1. Open the [management page](https://us-south.assistant.watson.cloud.ibm.com) (this link may not work depending on where you created your assistant) of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant
 
-![Intial WA interface](/images/initalcreateassistant.png)
+![Initial WA interface](/images/initalcreateassistant.png)
 
 1. Give the assistant a name
 
@@ -36,17 +36,17 @@ The free version is perfectly fine again.
 
 ![Assistant page](/images/createassistant.png)
 
-1. Slect the Create Skill option at the top of the page then give the skill a name eg.
+1. Select the Create Skill option at the top of the page then give the skill a name eg.
 
 ![Skill creation page](/images/createskill.png)
 
-1. This page shows the assistant settings including the skill connected to it and any Integations (interfaces) set up. Note the Preview Link integation that was created for you. Click on the Demo Skill you created to edit the contents.
+1. This page shows the assistant settings including the skill connected to it and any Integrations (interfaces) set up. Note the Preview Link integration that was created for you. Click on the Demo Skill you created to edit the contents.
 
 ![Skill selection page](/images/editskill.png)
 
 1. Here you edit the intents, entities and dialogue and other settings of your assistant. Click Create intent to create the first intent of your system.
 
-![Create intent intial page](/images/createintentsplash.png)
+![Create intent initial page](/images/createintentsplash.png)
 
 1. Go to the Intents section. Add an intent called "#get_my_ip" and complete it as shown below.
 
@@ -57,7 +57,7 @@ The free version is perfectly fine again.
 ![Image of Architecture](/images/defineintent.png)
 
 1. Close the Intent (top right arrow) and click on the Dialogue menu
-1. Click on the Add node button in the dilaogue view (shown below)
+1. Click on the Add node button in the dialogue view (shown below)
 
 ![Image of Architecture](/images/initialdialogue.png)
 
@@ -66,7 +66,7 @@ Then turn on the webhook feature. Click on the Customise gear icon at the top ri
 
 ![Image of Architecture](/images/initialdialoguesettings.png)
 
-The following diaglogue will be shown.
+The following dialogue will be shown.
 Click the Webhooks slider to on 
 
 ![Image of Architecture](/images/turnonwebhooks.png)
@@ -75,16 +75,16 @@ Now, back in the dialogue node settings you will see some additional fields have
 
 ![Image of Architecture](/images/webhookdialoguesettings.png)
 
-The paramteres section allows you to send data with your webhook call. We will be creating an API that accepts a "type" parameter later. For this demo lets add the type parameter and give it a value of "getIPAddress". Any number of parameters can be sent.
-The Return variable is auto populated with a name, but can be chnaged to anything you want. This becomes a Context Variable and will be filled with all the data that is returned by the webhook call later and can be used in your dialogues.
-The "Assistant responds" section is also pre-populated with a couple of values. If you change the variable name above, you'll need to chage the name in this section too.
+The parameters section allows you to send data with your webhook call. We will be creating an API that accepts a "type" parameter later. For this demo lets add the type parameter and give it a value of "getIPAddress". Any number of parameters can be sent.
+The Return variable is auto populated with a name, but can be changed to anything you want. This becomes a Context Variable and will be filled with all the data that is returned by the webhook call later and can be used in your dialogues.
+The "Assistant responds" section is also pre-populated with a couple of values. If you change the variable name above, you'll need to change the name in this section too.
 The first lines basically says "if we get a result back from the webhook (ie the variable is populated) then say x".
     This is the whole line: If assistant recognises `$webhook_result_1` then respond with `My ip address is <? $webhook_result_1.reply ?>".`
     The <? ?> format basically inserts a variable into the dialogue reply and can be used with any variable used within Watson Assistant. 
-The second line handles errors and Watson Assistant returnes errors in a particular format, shown below.
+The second line handles errors and Watson Assistant returns errors in a particular format, shown below.
     If assistant recognises `anything else` (ie an error) then reply with `The callout generated this error: <? output.webhook_error.webhook_result_1 ?>.`
     
-The last part to complete in Watson Assisant is setting the webook, but we need to creatre the API to call first!
+The last part to complete in Watson Assistant is setting the webhook, but we need to create the API to call first!
 
 We will use IBM App Connect to create the API. Within APP Connect we can then create as many integrations as we want (each called via a different "type" parameter, that can be called via that one API.
 
@@ -94,7 +94,7 @@ To create a new instance of APP Connect, go to your cloud account and search the
 
 Once the setup completes open App Connect, go to Manage and then Launch App Connect.
 
-Go to the Dashbard section and then click the New button and select Flows for an API.
+Go to the Dashboard section and then click the New button and select Flows for an API.
 Then give you API a name and give your model a name as shown below.
 
 ![Image of Architecture](/images/apicreation.png)
@@ -108,7 +108,7 @@ Click Create Model and set your API properties. I've set mine as shown below.
 ![Image of Architecture](/images/operations.png)
 
 Click the Implement Flow button. 
-You will be presented with a drag and drop flow editor. Click the + between the Request and Response objects, click on the Toolbox option and add and "If (conditional)" block. 
+You will be presented with a drag and drop flow editor. Click the + between the Request and Response objects, click on the Toolbox option and add an "If (conditional)" block. 
 
 ![Image of Architecture](/images/initialifflow.png)
 
