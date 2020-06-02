@@ -95,9 +95,24 @@ To create a new instance of APP Connect, go to your cloud account and search the
 Once the setup completes open App Connect, go to Manage and then Launch App Connect.
 
 Go to the Dashbard section and then click the New button and select Flows for an API.
+Then give you API a name and give your model a name as shown below.
 
 ![Image of Architecture](/images/apicreation.png)
 
+Click Create Model and set your API properties. I've set mine as shown below.
+
+![Image of Architecture](/images/apiproperties.png)
+
+![Image of Architecture](/images/addanoperation.png)
+
+![Image of Architecture](/images/operations.png)
+
+Click the Implement Flow button. 
+You will be presented with a drag and drop flow editor. Click the + between the Request and Response objects, click on the Toolbox option and add and "If (conditional)" block. 
+
+![Image of Architecture](/images/initialifflow.png)
+
+To do... document the API flow...
 
 ### License
 
