@@ -116,7 +116,7 @@ You will be presented with a drag and drop flow editor. Click the + between the 
 
 ![Image of Architecture](/images/initialifflow.png)
 
-Click on the yellow diamind icon in the If flow and configure the if statement as shown below ie select the Type parameter
+Click on the yellow diamind icon in the If flow and configure the if statement as shown below ie select the Type parameter by clicking in the first field then clicking the blue icon on the right side of the field.
 
 ![Image of Architecture](/images/ifsettings.png)
 
@@ -127,6 +127,28 @@ Next add add an Application by clicking the + icon and selecting the http applic
 Once added, edit the settings of the http application to match those below. The API we will be calling is this one https://api.ipify.org?format=json and it just returns the ip address of the calling system.
 
 ![Image of Architecture](/images/httpsettings.png)
+
+Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. This is needed because the output of the API is returned in JSON format. If it was returned as a string, this wouldn't be needed.
+
+![Image of Architecture](/images/jsonparser.png)
+
+Back on the If flow, click the yellow If icon again, and configure the output of the http node by clicking on the Output data drop down.
+
+![Image of Architecture](/images/ifoutputsettings.png)
+
+Then back at the top of the If flow, click on the Output scheme drop down and configure as shown below
+
+![Image of Architecture](/images/ifoutputsettings2.png)
+
+Configure the JSON Parser node as follows:
+Using the blue 3 bar icon in the field, select ResponseBody from the Request Body drop down.
+
+![Image of Architecture](/images/parsesettings1.png)
+
+Scroll down and enter an example output as shown below and then click the generate schema button
+
+![Image of Architecture](/images/parsesettings2.png)
+
 
 To do... document the API flow...
 
