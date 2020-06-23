@@ -88,7 +88,7 @@ The last part to complete in Watson Assistant is setting the webhook, but we nee
 
 We will use IBM App Connect to create the API. Within APP Connect we can then create as many integrations as we want (each called via a different "type" parameter, that can be called via that one API.
 
-#Create an instance of IBM App Connect
+# Create an instance of IBM App Connect
 
 To create a new instance of APP Connect, go to your cloud account and search the catalogue for App Connect. Follow the setup steps and choose the Lite plan.
 
@@ -103,14 +103,30 @@ Click Create Model and set your API properties. I've set mine as shown below.
 
 ![Image of Architecture](/images/apiproperties.png)
 
-![Image of Architecture](/images/addanoperation.png)
+Click on the Operations option and choose Add a custom operation.
+
+![Image of Architecture](/images/addoperation.png)
+
+Configure it as shown below.
 
 ![Image of Architecture](/images/operations.png)
 
 Click the Implement Flow button. 
-You will be presented with a drag and drop flow editor. Click the + between the Request and Response objects, click on the Toolbox option and add an "If (conditional)" block. 
+You will be presented with a drag and drop flow editor. Click the + between the Request and Response objects, click on the Toolbox option and add an "If (conditional)" block as shown below. 
 
 ![Image of Architecture](/images/initialifflow.png)
+
+Click on the yellow diamind icon in the If flow and configure the if statement as shown below ie select the Type parameter
+
+![Image of Architecture](/images/ifsettings.png)
+
+Next add add an Application by clicking the + icon and selecting the http application. Note you will need to Add a new Account  and then select the Invoke method. You don't need to add any details in the account settings for this example, all the fields can be left blank because we will not be calling an API that requires authentication or any special connection details. 
+
+![Image of Architecture](/images/ifflow1.png)
+
+Once added, edit the settings of the http application to match those below. The API we will be calling is this one https://api.ipify.org?format=json and it just returns the ip address of the calling system.
+
+![Image of Architecture](/images/httpsettings.png)
 
 To do... document the API flow...
 
