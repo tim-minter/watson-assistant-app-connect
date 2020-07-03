@@ -86,6 +86,8 @@ The first line basically says, "if we get a result back from the webhook (i.e. t
 The second line handles errors and Watson Assistant returns errors in a particular format, shown below.
     If assistant recognises `anything else` (i.e. an error) then reply with `The callout generated this error: <? output.webhook_error.webhook_result_1 ?>.`
     
+> Note: We return two variables in our API call be build below; responseData and responseBody. We set responseData to contain the IP Address value and responseBody to contain the whole of the JSON object returned by the API we call. To display the whole JSON object `<? $webhook_result_1.responseBody ?>` can be used in the Watson Assistant dialogue.
+
 The last part to complete in Watson Assistant is setting the webhook, but we need to create the API to call first!
 
 We will use IBM App Connect to create the API. Within APP Connect we can then create as many integrations as we want (each called via a different "type" parameter, that can be called via that one API.
@@ -130,28 +132,26 @@ Once added, edit the settings of the http application to match those below. The 
 
 ![Image of Architecture](/images/httpsettings.png)
 
-Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. Adding a JSON Parse node is optional in this case, but if you do add one, you can select what specific data returned from the API is returned by the If statement, otherwise the whole JSON object is returned and your Assistant will need to handle extracting the data (which may actually be desired in some situations). 
-
-> If you want to experiment then you can additionally try adding the output of the http node to the responseData field then both the responseData and responseBody fields will be returned buy the APP Connect API. responseBody will contain just the IP address and responseData will contain the whole the JSON object returned by the http node.
+Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. Adding a JSON Parse node is not strictly necessary but we do want to use it in this tutorial to get accross one additional point. Using it allows us to select exactly what data returned from the http node is returned by the If statement. Otherwise only the whole output of the http node (a JSON object) is returned and your Assistant will need to handle extracting the data (which may actually be desired in some situations). 
 
 ![Image of Architecture](/images/jsonparser.png)
-
-Back on the If flow, click the yellow If icon again, and configure the output of the http node by clicking on the Output data drop down.
-
-![Image of Architecture](/images/ifoutputsettings.png)
-
-Then back at the top of the If flow, click on the Output scheme drop down and configure as shown below.
-
-![Image of Architecture](/images/ifoutputsettings2.png)
 
 Configure the JSON Parser node as follows:
 Using the blue 3 bar icon in the field, select Response body from the HTTP Invoke method drop down (not the Request drop down).
 
 ![Image of Architecture](/images/parsesettings1.png)
 
-Scroll down and enter an example output as shown below and then click the generate schema button. In this case we know what the example output is (because I've called it) but obviously you'd need find out yourself what any other API you want to call produces.
+Scroll down and enter an example output as shown below `{"ip":"192.168.0.1"}` and then click the generate schema button. In this case we know what the example output is (because I've called it) but obviously you'd need find out yourself what any other API you want to call produces. This may seem fidly but it's required otherwise the flow doesn't know what data it has to map of course.
 
 ![Image of Architecture](/images/parsesettings2.png)
+
+Back on the If flow, click the yellow If icon again, and configure the output of the http node by clicking on the Output data drop down.
+
+![Image of Architecture](/images/ifoutputsettings.png)
+
+Then back at the top of the If flow, click on the Output schema drop down and configure as shown below.
+
+![Image of Architecture](/images/ifoutputsettings2.png)
 
 Back on the If statement, click on the Output dropdown for the getIPAddress option and set the Response Body as shown below.
 
