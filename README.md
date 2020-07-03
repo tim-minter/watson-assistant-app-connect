@@ -132,7 +132,9 @@ Once added, edit the settings of the http application to match those below. The 
 
 ![Image of Architecture](/images/httpsettings.png)
 
-Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. Adding a JSON Parse node is not strictly necessary but we do want to use it in this tutorial to get accross one additional point. Using it allows us to select exactly what data returned from the http node is returned by the If statement. Otherwise only the whole output of the http node (a JSON object) is returned and your Assistant will need to handle extracting the data (which may actually be desired in some situations). 
+Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. 
+
+> Adding a JSON Parser node is not strictly necessary but we do want to use it in this tutorial to get accross one additional point (and so that the Watson Assisant dialogue we created above works). Using it allows us to select exactly what data returned from the http node is returned by the If statement. Otherwise only the whole output of the http node (a JSON object) is returned and your Assistant will need to handle extracting the data (which may actually be desired in some situations). 
 
 ![Image of Architecture](/images/jsonparser.png)
 
@@ -141,47 +143,55 @@ Using the blue 3 bar icon in the field, select Response body from the HTTP Invok
 
 ![Image of Architecture](/images/parsesettings1.png)
 
-Scroll down and enter an example output as shown below `{"ip":"192.168.0.1"}` and then click the generate schema button. In this case we know what the example output is (because I've called it) but obviously you'd need find out yourself what any other API you want to call produces. This may seem fidly but it's required otherwise the flow doesn't know what data it has to map of course.
+Scroll down and enter an example output as shown below `{"ip":"192.168.0.1"}` and then click the generate schema button. 
+
+> In this case we know what the example output is (because I've called it previously) but obviously you'd need find out yourself what any other API you want to call produces. This may seem fidly but it's required otherwise the flow doesn't know what data it has to map of course.
 
 ![Image of Architecture](/images/parsesettings2.png)
 
-Back on the If flow, click the yellow If icon again, and configure the output of the http node by clicking on the Output data drop down.
+Back on the If flow, click the yellow If icon again. 
+We are going to configure the output of the getIPAddress If statement. 
+Click on the Output data drop down and select the options shown below.
+* responseBody comes from the http node (and contains the full JSON response of the API we called).
+* type comes from the request object (ie it is passed through all the way).
+* responseData comes from the JSON Parser node (and is the value of the ip key obtained from the full JSON response of the http node).
 
 ![Image of Architecture](/images/ifoutputsettings.png)
 
 Then back at the top of the If flow, click on the Output schema drop down and configure as shown below.
+This is where the actual output of the whole If flow is configured.
+In our case we could remove the type property if we wanted. I have left it in place.
 
 ![Image of Architecture](/images/ifoutputsettings2.png)
 
-Back on the If statement, click on the Output dropdown for the getIPAddress option and set the Response Body as shown below.
-
-![Image of Architecture](/images/ifoutput.png)
-
-Now we need to publish the API so Watson Assistant can call it via it's webhook feature.
-Click the Don button and then select Manage (next to Define) from the top bar.
+Now we need to publish the API so Watson Assistant can call it via its webhook feature.
+Click the Done button and then select Manage (next to Define) from the top bar.
 As it says, "To get started, scroll down to 'Sharing Outside of Cloud Foundry organization' and click on 'Create API key'. Follow the 'API Portal Link' link to explore the API in the portal and invoke it by clicking on 'Try it'".
 Give the API key any name you want.
 
 ![Image of Architecture](/images/sharingoutside.png)
 
-You'll end up with an API key and URL to the API definition as shown below.
+You'll end up with an API key and a URL linking to the API definition as shown below.
 
 ![Image of Architecture](/images/sharingoutsidekey.png)
 
 Copy the link and paste to a new browser window.
-You'll see something similar the page below.
+You'll see something similar to the page below.
 
 ![Image of Architecture](/images/apiendpoint.png)
 
 The endpoint URL is what you'll need to paste into the Watson Assistant webhook setting (along with the API Key you created above).
 
-Now we just need to start the flow in IBM App Connect so it is callable.
-At the top of the page you'll see three dots, click those and select Start API. If all goes well the circle should turn green and we are now done in IBM App Connect and our API is running. Note: to edit the flow later you'll need to stop the flow first.
+Now we need to start the flow in IBM APP Connect so it is callable.
+At the top of the page you'll see three dots, click those and select Start API. If all goes well, the circle should turn green and we are now done in IBM APP Connect and our API is running. 
 
-Back in Watson Assistant.
-Go to your skill and select Options/Webhooks.
+> Note: If you want to edit the flow later, you'll need to stop the flow first and then start it again (that gets me every time! :smile).
+
+## Putting it all together
+
+Back in Watson Assistant, go to your skill and select Options/Webhooks.
 Paste the API endpoint URL into the webhook URL field.
-Add three headers and complete them as shown below (the API Key from above goes in the X-IBM-Client-Id header setting.
+Add three headers (using the Add header option below the headers section) and complete them as shown below (the API Key from above goes in the X-IBM-Client-Id header setting.
 
 ![Image of Architecture](/images/webookapisettings.png)
 
