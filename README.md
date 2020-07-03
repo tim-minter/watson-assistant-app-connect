@@ -1,14 +1,18 @@
-# No Code Watson Assistant and App Connect integration sample
+# No Code Watson Assistant and IBM App Connect integration sample
 
-This is a simple [Watson Assistant](https://cloud.ibm.com/catalog/services/watson-assistant) bot which demonstrates how to call [IBM App Connect](https://cloud.ibm.com/catalog/services/app-connect) "natively" to run any number of integrations e.g. business processes, automations or external API calls and more. 
+This is a simple [Watson Assistant](https://cloud.ibm.com/catalog/services/watson-assistant) bot that demonstrates how to call [IBM App Connect](https://cloud.ibm.com/catalog/services/app-connect) "natively" to run any number of integrations e.g. business processes, automations or external API calls and more. 
 
 Not long ago, you would have needed to write (and therefore host and secure) code to achieve this, however that is no longer the case. You can easily create a chatbot/virtual assistant from "out of the box" [IBM Cloud](https://cloud.ibm.com) services with no custom code to manage, secure or maintain. The killer feature of the whole solution is that, once assembled, the end to end system can be managed and maintained by business users.
 
 This is a write up of a real project I completed and, as an example, I was able to add a ServiceNow problem creation conversation to my Watson Assistant in less than 15 minutes (including the creation of the ServiceNow sandbox from https://developer.servicenow.com).
 
+## A little about IBM App Connect
 IBM App Connect allows you to "connect anything to anything" and build workflows to "do anything" between those connections. We are talking workflow/business logic and transformations basically. This really could be anything from turning an email into a problem ticket to recording the mileage of a fleet of connected vehicles and figuring out which miles should be expenses and then handling the expense process, to performing automated insurance claims based on images sent by the customer etc.
 
-This solution uses an IBM App Connect API flow that exposes an API which acts as a router for incoming calls from Watson Assistant. Watson Assistant has a powerful Webhook feature but is limited in that only one web hook can be configured per assistant skill. It's entirely possible to have a number of skills within a Watson Assistant but even within a single skill you may want to be able to call a number of integrations, so a router API makes sense. 
+IBM App Connect can run two kinds of flows; event driven flows, and flows for APIs. This solution uses an API flow that exposes an API which acts as a router for incoming calls from Watson Assistant. 
+
+## Why do we need this?
+Watson Assistant has a powerful Webhook feature but it is limited in that only one web hook can be configured per assistant skill. It's entirely possible to have a number of skills within a Watson Assistant, but even within a single skill you may want to be able to call a number of integrations, so a router API makes sense. 
 
 # Architecture
 
