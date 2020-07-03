@@ -17,51 +17,52 @@ Watson Assistant has a powerful Webhook feature that allows native API calls fro
 # Architecture
 
 ![Image of Architecture](/images/Architecture.png)
+> Note: IBM API Connect is shown in the architecture above but not explicitly used in this tutorial. IBM App Connect actually contains API Connect functionality (we use this built in functionality to publish the API below). In an enterprise you may want to consider using the IBM API Connect service externally as shown above.
 
 # Setup
 
-1. Sign in to or up for an IBM Cloud account [here](https://cloud.ibm.com)
+Sign in or create an IBM Cloud account [here](https://cloud.ibm.com)
 
-1. Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
+Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
 The free version can be used. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
 
-1. Create an instance of IBM Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
+Create an instance of IBM Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
 The free version is perfectly fine again.
 
-1. Open the [management page](https://us-south.assistant.watson.cloud.ibm.com) (this link may not work depending on where you created your assistant) of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant
+Open the [management page](https://us-south.assistant.watson.cloud.ibm.com) (this link may not work depending on where you created your assistant) of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant
 
 ![Initial WA interface](/images/initalcreateassistant.png)
 
-1. Give the assistant a name
+Give the assistant a name
 
 ![Assistant creation page](/images/createassistantdetails.png)
 
-1. Then click on the Add Dialogue skill on the next page...
+Then click on the Add Dialogue skill on the next page...
 
 ![Assistant page](/images/createassistant.png)
 
-1. Select the Create Skill option at the top of the page then give the skill a name e.g.
+Select the Create Skill option at the top of the page then give the skill a name e.g.
 
 ![Skill creation page](/images/createskill.png)
 
-1. This page shows the assistant settings including the skill connected to it and any Integrations (interfaces) set up. Note the Preview Link integration that was created for you. Click on the Demo Skill you created to edit the contents.
+This page shows the assistant settings including the skill connected to it and any Integrations (interfaces) set up. Note the Preview Link integration that was created for you. Click on the Demo Skill you created to edit the contents.
 
 ![Skill selection page](/images/editskill.png)
 
-1. Here you edit the intents, entities and dialogue and other settings of your assistant. Click Create intent to create the first intent of your system.
+Here you edit the intents, entities and dialogue and other settings of your assistant. Click Create intent to create the first intent of your system.
 
 ![Create intent initial page](/images/createintentsplash.png)
 
-1. Go to the Intents section. Add an intent called "#get_my_ip" and complete it as shown below.
+Go to the Intents section. Add an intent called "#get_my_ip" and complete it as shown below.
 
 ![Image of Architecture](/images/createintent.png)
 
-1. Fill in the intent as shown below.
+Fill in the intent as shown below.
 
 ![Image of Architecture](/images/defineintent.png)
 
-1. Close the Intent (top right arrow) and click on the Dialogue menu
-1. Click on the Add node button in the dialogue view (shown below)
+Close the Intent (top right arrow) and click on the Dialogue menu
+Click on the Add node button in the dialogue view (shown below)
 
 ![Image of Architecture](/images/initialdialogue.png)
 
