@@ -26,14 +26,14 @@ Sign in or create an IBM Cloud account [here](https://cloud.ibm.com)
 Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
 The free version can be used. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
 
-Create an instance of IBM Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
+Create an instance of IBM APP Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
 The free version is perfectly fine again.
 
-Open the [management page](https://us-south.assistant.watson.cloud.ibm.com) (this link may not work depending on where you created your assistant) of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant
+Open the [management page](https://us-south.assistant.watson.cloud.ibm.com) (this link may not work depending on where you created your assistant) of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant.
 
 ![Initial WA interface](/images/initalcreateassistant.png)
 
-Give the assistant a name
+Give the assistant a name.
 
 ![Assistant creation page](/images/createassistantdetails.png)
 
@@ -61,18 +61,18 @@ Fill in the intent as shown below.
 
 ![Image of Architecture](/images/defineintent.png)
 
-Close the Intent (top right arrow) and click on the Dialogue menu
-Click on the Add node button in the dialogue view (shown below)
+Close the Intent (top right arrow) and click on the Dialogue menu.
+Click on the Add node button in the dialogue view (shown below).
 
 ![Image of Architecture](/images/initialdialogue.png)
 
 The first thing to do here is select the intent you just created in the box shown below.
-Then turn on the webhook feature. Click on the Customise gear icon at the top right
+Then turn on the webhook feature. Click on the Customise gear icon at the top right.
 
 ![Image of Architecture](/images/initialdialoguesettings.png)
 
 The following dialogue will be shown.
-Click the Webhooks slider to on 
+Click the Webhooks slider to on.
 
 ![Image of Architecture](/images/turnonwebhooks.png)
 
@@ -141,7 +141,7 @@ Back on the If flow, click the yellow If icon again, and configure the output of
 
 ![Image of Architecture](/images/ifoutputsettings.png)
 
-Then back at the top of the If flow, click on the Output scheme drop down and configure as shown below
+Then back at the top of the If flow, click on the Output scheme drop down and configure as shown below.
 
 ![Image of Architecture](/images/ifoutputsettings2.png)
 
@@ -179,7 +179,7 @@ The endpoint URL is what you'll need to paste into the Watson Assistant webhook 
 Now we just need to start the flow in IBM App Connect so it is callable.
 At the top of the page you'll see three dots, click those and select Start API. If all goes well the circle should turn green and we are now done in IBM App Connect and our API is running. Note: to edit the flow later you'll need to stop the flow first.
 
-Back in Watson Assistant
+Back in Watson Assistant.
 Go to your skill and select Options/Webhooks.
 Paste the API endpoint URL into the webhook URL field.
 Add three headers and complete them as shown below (the API Key from above goes in the X-IBM-Client-Id header setting.
