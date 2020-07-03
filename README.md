@@ -175,7 +175,17 @@ Now we just need to start the flow in IBM App Connect so it is callable.
 At the top of the page you'll see three dot, click those ans select Start API. If all goes well the circle should turn green and we are now done in IBM App Connect and our API is running. Note: to edit the flow later you'll need to stop the flow first.
 
 Back in Watson Assistant
+Go to your skill and select Options/Webhooks.
+Paste the API endpoint url into the webhook url field.
+Add three headers and complete them as shown below (the API Key from above goes in the X-IBM-Client-Id header setting.
 
+![Image of Architecture](/images/webookapisettings.png)
+
+We can now try the integration!
+Click on the Try it out link at the top right of the page and type "what's your ip address?".
+The result should come back as shown below!
+
+![Image of Architecture](/images/tryitout.png)
 
 ### License
 
