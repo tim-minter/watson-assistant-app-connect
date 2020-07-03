@@ -128,7 +128,7 @@ Once added, edit the settings of the http application to match those below. The 
 
 ![Image of Architecture](/images/httpsettings.png)
 
-Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. This is needed because the output of the API is returned in JSON format. If it was returned as a string, this wouldn't be needed.
+Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. Adding a JSON Parse node is optional in this case but if you do add one, you can select what specific data returned from the API is returned by the If statement, otherwise the whole JSON object is returned and your Assistant will need to handle extracting the data (which may actually be desired in some situations).
 
 ![Image of Architecture](/images/jsonparser.png)
 
@@ -141,16 +141,41 @@ Then back at the top of the If flow, click on the Output scheme drop down and co
 ![Image of Architecture](/images/ifoutputsettings2.png)
 
 Configure the JSON Parser node as follows:
-Using the blue 3 bar icon in the field, select ResponseBody from the Request Body drop down.
+Using the blue 3 bar icon in the field, select Response body from the HTTP Invoke method drop down (not the Request drop down).
 
 ![Image of Architecture](/images/parsesettings1.png)
 
-Scroll down and enter an example output as shown below and then click the generate schema button
+Scroll down and enter an example output as shown below and then click the generate schema button. In this case we know what the example output is (becasue I've called it) but obviously you'd need find out yourself what any other API you want to call produces.
 
 ![Image of Architecture](/images/parsesettings2.png)
 
+Back on the If statement, click on the Output dropdown for the getIPAddress option and set the Response Body as shown below.
 
-To do... document the API flow...
+![Image of Architecture](/images/ifoutput.png)
+
+Now we need to publish the API so Watson Assistant can call it via it's webhook feature.
+Click the Don button and them select Manage (next to Define) from the top bar.
+As it says "To get started, scroll down to 'Sharing Outside of Cloud Foundry organization' and click on 'Create API key'. Follow the 'API Portal Link' link to explore the API in the portal and invoke it by clicking on 'Try it'".
+Give the API key any name you want.
+
+![Image of Architecture](/images/sharingoutside.png)
+
+You'll end up with an API key and url to the API definition as shown below.
+
+![Image of Architecture](/images/sharingoutsidekey.png)
+
+Copy the link and paste to a new browser window.
+You'll see something similar the the page below.
+
+![Image of Architecture](/images/apiendpoint.png)
+
+The endpoint url is what you'll need to paste into the Watson Assistant webhook setting (along iwth the API Key you created above).
+
+Now we just need to start the flow in IBM App Connect so it is callable.
+At the top of the page you'll see three dot, click those ans select Start API. If all goes well the circle should turn green and we are now done in IBM App Connect and our API is running. Note: to edit the flow later you'll need to stop the flow first.
+
+Back in Watson Assistant
+
 
 ### License
 
