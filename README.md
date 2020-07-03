@@ -23,13 +23,13 @@ Watson Assistant has a powerful Webhook feature that allows native API calls fro
 
 Sign in or create an IBM Cloud account [here](https://cloud.ibm.com)
 
-Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
-The free version can be used. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
-
 Create an instance of IBM APP Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
 The free version is perfectly fine again.
 
-Open the [management page](https://us-south.assistant.watson.cloud.ibm.com) (this link may not work depending on where you created your assistant) of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant.
+Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
+The free version can be used. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
+
+Open the Management page of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant.
 
 ![Initial WA interface](/images/initalcreateassistant.png)
 
