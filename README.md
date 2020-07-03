@@ -12,7 +12,7 @@ IBM App Connect allows you to "connect anything to anything" and build workflows
 IBM App Connect can run two kinds of flows; event driven flows, and flows for APIs. This solution uses an API flow that exposes an API which acts as a router for incoming calls from Watson Assistant. 
 
 ## Why do we need this?
-Watson Assistant has a powerful Webhook feature but it is limited in that only one web hook can be configured per assistant skill. It's entirely possible to have a number of skills within a Watson Assistant, but even within a single skill you may want to be able to call a number of integrations, so a router API makes sense. 
+Watson Assistant has a powerful Webhook feature that allows native API calls from conversation dialogues, but it is limited in that only one web hook can be configured per assistant skill. It's entirely possible to have a number of skills within a Watson Assistant, but even within a single skill you may want to be able to call a number of integrations, so a router API makes sense. 
 
 # Architecture
 
