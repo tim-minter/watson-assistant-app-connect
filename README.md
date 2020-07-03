@@ -1,12 +1,12 @@
 # No Code Watson Assistant and App Connect integration sample
 
-This is a sample [Watson Assistant](https://cloud.ibm.com/catalog/services/watson-assistant) bot which demonstrates how to call [IBM App Connect](https://cloud.ibm.com/catalog/services/app-connect) "natively" to run any number of integrations eg business processes, automations or external API calls and more. 
+This is a simple [Watson Assistant](https://cloud.ibm.com/catalog/services/watson-assistant) bot which demonstrates how to call [IBM App Connect](https://cloud.ibm.com/catalog/services/app-connect) "natively" to run any number of integrations e.g. business processes, automations or external API calls and more. 
 
-Not long ago, you would have needed to write (and therefore host and secure) code to achieve this, however that is no longer the case. You can easily create a chatbot/virtual assistant from "out of the box" [IBM Cloud](https://cloud.ibm.com) services with no custom code to manage, secure or maintain. The killer feature of the whole solution is that, once assembled, the end to end system can be managed and added to by business users without the need for developer time.
+Not long ago, you would have needed to write (and therefore host and secure) code to achieve this, however that is no longer the case. You can easily create a chatbot/virtual assistant from "out of the box" [IBM Cloud](https://cloud.ibm.com) services with no custom code to manage, secure or maintain. The killer feature of the whole solution is that, once assembled, the end to end system can be managed and maintained by business users.
 
 This is a write up of a real project I completed and, as an example, I was able to add a ServiceNow problem creation conversation to my Watson Assistant in less than 15 minutes (including the creation of the ServiceNow sandbox from https://developer.servicenow.com).
 
-IBM App Connect allows you to "connect anything to anything" and build workflows to "do anything" between those connections. We are talking workflow/business logic and transformations basically. This really could be anything from turning an email into a problem ticket to recording the mileage of a fleet of connected vehicles and figuring out which miles should be expenses and then handling the expense process, to performing automated insurance claims based on images sent by the customer etc etc.
+IBM App Connect allows you to "connect anything to anything" and build workflows to "do anything" between those connections. We are talking workflow/business logic and transformations basically. This really could be anything from turning an email into a problem ticket to recording the mileage of a fleet of connected vehicles and figuring out which miles should be expenses and then handling the expense process, to performing automated insurance claims based on images sent by the customer etc.
 
 This solution uses an IBM App Connect API flow that exposes an API which acts as a router for incoming calls from Watson Assistant. Watson Assistant has a powerful Webhook feature but is limited in that only one web hook can be configured per assistant skill. It's entirely possible to have a number of skills within a Watson Assistant but even within a single skill you may want to be able to call a number of integrations, so a router API makes sense. 
 
@@ -36,7 +36,7 @@ The free version is perfectly fine again.
 
 ![Assistant page](/images/createassistant.png)
 
-1. Select the Create Skill option at the top of the page then give the skill a name eg.
+1. Select the Create Skill option at the top of the page then give the skill a name e.g.
 
 ![Skill creation page](/images/createskill.png)
 
@@ -76,13 +76,13 @@ Now, back in the dialogue node settings you will see some additional fields have
 ![Image of Architecture](/images/webhookdialoguesettings.png)
 
 The parameters section allows you to send data with your webhook call. We will be creating an API that accepts a "type" parameter later. For this demo lets add the type parameter and give it a value of "getIPAddress". Any number of parameters can be sent.
-The Return variable is auto populated with a name, but can be changed to anything you want. This becomes a Context Variable and will be filled with all the data that is returned by the webhook call later and can be used in your dialogues.
+The Return variable is auto populated with a name but can be changed to anything you want. This becomes a Context Variable and will be filled with all the data that is returned by the webhook call later and can be used in your dialogues.
 The "Assistant responds" section is also pre-populated with a couple of values. If you change the variable name above, you'll need to change the name in this section too.
-The first lines basically says "if we get a result back from the webhook (ie the variable is populated) then say x".
+The first lines basically says, "if we get a result back from the webhook (i.e. the variable is populated) then say x".
     This is the whole line: If assistant recognises `$webhook_result_1` then respond with `My ip address is <? $webhook_result_1.reply ?>".`
     The <? ?> format basically inserts a variable into the dialogue reply and can be used with any variable used within Watson Assistant. 
 The second line handles errors and Watson Assistant returns errors in a particular format, shown below.
-    If assistant recognises `anything else` (ie an error) then reply with `The callout generated this error: <? output.webhook_error.webhook_result_1 ?>.`
+    If assistant recognises `anything else` (i.e. an error) then reply with `The callout generated this error: <? output.webhook_error.webhook_result_1 ?>.`
     
 The last part to complete in Watson Assistant is setting the webhook, but we need to create the API to call first!
 
@@ -116,15 +116,15 @@ You will be presented with a drag and drop flow editor. Click the + between the 
 
 ![Image of Architecture](/images/initialifflow.png)
 
-Click on the yellow diamind icon in the If flow and configure the if statement as shown below ie select the Type parameter by clicking in the first field then clicking the blue icon on the right side of the field.
+Click on the yellow diamond icon in the If flow and configure the if statement as shown below i.e. select the Type parameter by clicking in the first field then clicking the blue icon on the right side of the field.
 
 ![Image of Architecture](/images/ifsettings.png)
 
-Next add add an Application by clicking the + icon and selecting the http application. Note you will need to Add a new Account  and then select the Invoke method. You don't need to add any details in the account settings for this example, all the fields can be left blank because we will not be calling an API that requires authentication or any special connection details. 
+Next add an Application by clicking the + icon and selecting the http application. Note you will need to Add a new Account  and then select the Invoke method. You don't need to add any details in the account settings for this example, all the fields can be left blank because we will not be calling an API that requires authentication or any special connection details. 
 
 ![Image of Architecture](/images/ifflow1.png)
 
-Once added, edit the settings of the http application to match those below. The API we will be calling is this one https://api.ipify.org?format=json and it just returns the ip address of the calling system.
+Once added, edit the settings of the http application to match those below. The API we will be calling is this one https://api.ipify.org?format=json and it just returns the IP address of the calling system.
 
 ![Image of Architecture](/images/httpsettings.png)
 
@@ -145,7 +145,7 @@ Using the blue 3 bar icon in the field, select Response body from the HTTP Invok
 
 ![Image of Architecture](/images/parsesettings1.png)
 
-Scroll down and enter an example output as shown below and then click the generate schema button. In this case we know what the example output is (becasue I've called it) but obviously you'd need find out yourself what any other API you want to call produces.
+Scroll down and enter an example output as shown below and then click the generate schema button. In this case we know what the example output is (because I've called it) but obviously you'd need find out yourself what any other API you want to call produces.
 
 ![Image of Architecture](/images/parsesettings2.png)
 
@@ -154,29 +154,29 @@ Back on the If statement, click on the Output dropdown for the getIPAddress opti
 ![Image of Architecture](/images/ifoutput.png)
 
 Now we need to publish the API so Watson Assistant can call it via it's webhook feature.
-Click the Don button and them select Manage (next to Define) from the top bar.
-As it says "To get started, scroll down to 'Sharing Outside of Cloud Foundry organization' and click on 'Create API key'. Follow the 'API Portal Link' link to explore the API in the portal and invoke it by clicking on 'Try it'".
+Click the Don button and then select Manage (next to Define) from the top bar.
+As it says, "To get started, scroll down to 'Sharing Outside of Cloud Foundry organization' and click on 'Create API key'. Follow the 'API Portal Link' link to explore the API in the portal and invoke it by clicking on 'Try it'".
 Give the API key any name you want.
 
 ![Image of Architecture](/images/sharingoutside.png)
 
-You'll end up with an API key and url to the API definition as shown below.
+You'll end up with an API key and URL to the API definition as shown below.
 
 ![Image of Architecture](/images/sharingoutsidekey.png)
 
 Copy the link and paste to a new browser window.
-You'll see something similar the the page below.
+You'll see something similar the page below.
 
 ![Image of Architecture](/images/apiendpoint.png)
 
-The endpoint url is what you'll need to paste into the Watson Assistant webhook setting (along iwth the API Key you created above).
+The endpoint URL is what you'll need to paste into the Watson Assistant webhook setting (along with the API Key you created above).
 
 Now we just need to start the flow in IBM App Connect so it is callable.
-At the top of the page you'll see three dot, click those ans select Start API. If all goes well the circle should turn green and we are now done in IBM App Connect and our API is running. Note: to edit the flow later you'll need to stop the flow first.
+At the top of the page you'll see three dots, click those and select Start API. If all goes well the circle should turn green and we are now done in IBM App Connect and our API is running. Note: to edit the flow later you'll need to stop the flow first.
 
 Back in Watson Assistant
 Go to your skill and select Options/Webhooks.
-Paste the API endpoint url into the webhook url field.
+Paste the API endpoint URL into the webhook URL field.
 Add three headers and complete them as shown below (the API Key from above goes in the X-IBM-Client-Id header setting.
 
 ![Image of Architecture](/images/webookapisettings.png)
