@@ -24,10 +24,10 @@ Watson Assistant has a powerful Webhook feature that allows native API calls fro
 Sign in or create an IBM Cloud account [here](https://cloud.ibm.com)
 
 Create an instance of IBM APP Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
-The free version is perfectly fine again.
+The free version is perfectly fine.
 
 Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
-The free version can be used. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
+The free version can be used again. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
 
 Open the Management page of your Watson Assistant and click on the Assistants menu (top left) then click on Create Assistant.
 
@@ -37,7 +37,7 @@ Give the assistant a name.
 
 ![Assistant creation page](/images/createassistantdetails.png)
 
-Then click on the Add Dialogue skill on the next page...
+Then click on the Add dialogue skill button on the next page...
 
 ![Assistant page](/images/createassistant.png)
 
@@ -81,11 +81,11 @@ Now, back in the dialogue node settings you will see some additional fields have
 ![Image of Architecture](/images/webhookdialoguesettings.png)
 
 The parameters section allows you to send data with your webhook call. We will be creating an API that accepts a "type" parameter later. For this demo lets add the type parameter and give it a value of "getIPAddress". Any number of parameters can be sent.
-The Return variable is auto populated with a name but can be changed to anything you want. This becomes a Context Variable and will be filled with all the data that is returned by the webhook call later and can be used in your dialogues.
+The Return variable is auto populated with a name but can be changed to anything you want. This becomes a Watson Assistant context variable (called $webhook_result_1 in this example) and will be filled with all the data that is returned by the webhook call later. Context variables can be accessed and used in your dialogues.
 The "Assistant responds" section is also pre-populated with a couple of values. If you change the variable name above, you'll need to change the name in this section too.
-The first lines basically says, "if we get a result back from the webhook (i.e. the variable is populated) then say x".
-    This is the whole line: If assistant recognises `$webhook_result_1` then respond with `My ip address is <? $webhook_result_1.reply ?>".`
-    The <? ?> format basically inserts a variable into the dialogue reply and can be used with any variable used within Watson Assistant. 
+The first line basically says, "if we get a result back from the webhook (i.e. the variable is populated) then say x".
+    This is the whole line: If assistant recognises `$webhook_result_1` then respond with `My IP address is <? $webhook_result_1.responseData ?>`
+    The <? ?> format basically inserts a variable into the dialogue reply and can be used with any context variable used within Watson Assistant. 
 The second line handles errors and Watson Assistant returns errors in a particular format, shown below.
     If assistant recognises `anything else` (i.e. an error) then reply with `The callout generated this error: <? output.webhook_error.webhook_result_1 ?>.`
     
