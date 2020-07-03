@@ -23,9 +23,6 @@ Watson Assistant has a powerful Webhook feature that allows native API calls fro
 
 Sign in or create an IBM Cloud account [here](https://cloud.ibm.com)
 
-Create an instance of IBM APP Connect on IBM Cloud [here](https://cloud.ibm.com/catalog/services/app-connect).
-The free version is perfectly fine.
-
 Create a Watson Assistant service on IBM Cloud [here](https://cloud.ibm.com/catalog/services/watson-assistant).
 The free version can be used again. In my actual solution I used the Plus version that comes with an incredibly simple way to embed the Assistant into a web page.
 
@@ -95,16 +92,16 @@ We will use IBM App Connect to create the API. Within APP Connect we can then cr
 
 # Create an instance of IBM App Connect
 
-To create a new instance of APP Connect, go to your cloud account and search the catalogue for App Connect. Follow the setup steps and choose the Lite plan.
+To create a new instance of APP Connect, go to your cloud account and search the catalogue for App Connect or click [here](https://cloud.ibm.com/catalog/services/app-connect). Follow the setup steps and choose the Lite plan.
 
-Once the setup completes open App Connect, go to Manage and then Launch App Connect.
+Once the setup completes open IBM App Connect, go to Manage and then Launch App Connect.
 
 Go to the Dashboard section and then click the New button and select Flows for an API.
-Then give you API a name and give your model a name as shown below.
+Then give your API a name and give your model a name as shown below.
 
 ![Image of Architecture](/images/apicreation.png)
 
-Click Create Model and set your API properties. I've set mine as shown below.
+Click Create Model and set your API properties. I've set mine as shown below. All the fields are required exactly as shown in this tutorial except for responseData. I used that to return raw data in my test but we don't discuss that here.
 
 ![Image of Architecture](/images/apiproperties.png)
 
@@ -121,19 +118,21 @@ You will be presented with a drag and drop flow editor. Click the + between the 
 
 ![Image of Architecture](/images/initialifflow.png)
 
-Click on the yellow diamond icon in the If flow and configure the if statement as shown below i.e. select the Type parameter by clicking in the first field then clicking the blue icon on the right side of the field.
+Click on the yellow diamond icon in the If flow and configure the If statement as shown below i.e. select the Type parameter by clicking in the first field then clicking the blue icon on the right side of the field.
 
 ![Image of Architecture](/images/ifsettings.png)
 
-Next add an Application by clicking the + icon and selecting the http application. Note you will need to Add a new Account  and then select the Invoke method. You don't need to add any details in the account settings for this example, all the fields can be left blank because we will not be calling an API that requires authentication or any special connection details. 
+Next add an Application by clicking the + icon and selecting the http application. Note you will need to Add a new Account and then select the Invoke method. You don't need to add any details in the Account settings for this example, all the fields can be left blank because we will not be calling an API that requires authentication or any special connection details. 
 
 ![Image of Architecture](/images/ifflow1.png)
 
-Once added, edit the settings of the http application to match those below. The API we will be calling is this one https://api.ipify.org?format=json and it just returns the IP address of the calling system.
+Once added, edit the settings of the http application to match those below. The API we will be calling is this one https://api.ipify.org?format=json and it just returns the IP address of the calling system in JSON format.
 
 ![Image of Architecture](/images/httpsettings.png)
 
-Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. Adding a JSON Parse node is optional in this case but if you do add one, you can select what specific data returned from the API is returned by the If statement, otherwise the whole JSON object is returned and your Assistant will need to handle extracting the data (which may actually be desired in some situations).
+Add another node to the flow by clicking the + icon to the right of the http node and selecting JSON Parser from the Toolbox list. Adding a JSON Parse node is optional in this case, but if you do add one, you can select what specific data returned from the API is returned by the If statement, otherwise the whole JSON object is returned and your Assistant will need to handle extracting the data (which may actually be desired in some situations). 
+
+> If you want to experiment then you can additionally try adding the output of the http node to the responseData field then both the responseData and responseBody fields will be returned buy the APP Connect API. responseBody will contain just the IP address and responseData will contain the whole the JSON object returned by the http node.
 
 ![Image of Architecture](/images/jsonparser.png)
 
