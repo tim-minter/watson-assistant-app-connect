@@ -151,18 +151,19 @@ Scroll down and enter an example output as shown below `{"ip":"192.168.0.1"}` an
 
 Back on the If flow, click the yellow If icon again. 
 We are going to configure the output of the getIPAddress If statement. 
-Click on the Output data drop down and select the options shown below.
+
+First, at the top of the If flow, click on the Output schema drop down and configure as shown below.
+This is where the actual output of the whole If flow is configured.
+In our case we could remove the type property if we wanted. I have left it in place.
+
+![Image of Architecture](/images/ifoutputsettings2.png)
+
+Then click on the Output data drop down and select the options shown below.
 * responseBody comes from the http node (and contains the full JSON response of the API we called).
 * type comes from the request object (ie it is passed through all the way).
 * responseData comes from the JSON Parser node (and is the value of the ip key obtained from the full JSON response of the http node).
 
 ![Image of Architecture](/images/ifoutputsettings.png)
-
-Then back at the top of the If flow, click on the Output schema drop down and configure as shown below.
-This is where the actual output of the whole If flow is configured.
-In our case we could remove the type property if we wanted. I have left it in place.
-
-![Image of Architecture](/images/ifoutputsettings2.png)
 
 Now we need to publish the API so Watson Assistant can call it via its webhook feature.
 Click the Done button and then select Manage (next to Define) from the top bar.
